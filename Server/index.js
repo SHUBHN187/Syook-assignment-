@@ -5,6 +5,7 @@ const router = require("./router");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const crypto = require('crypto');
 
 const dotenv = require("dotenv");
 const bcrypt = require("bcrypt");
@@ -57,6 +58,28 @@ const io = require("socket.io")(server, {
 
 let connectedUsers = [];
 
+const encryptionKey = 'hey'; // Replace with your encryption key
+
+// Define the encryption and decryption functions
+function encrypt(text) {
+  const cipher = crypto.createCipher('aes-256-cbc', encryptionKey);
+  let encrypted = cipher.update(text, 'utf8', 'hex');
+  encrypted += cipher.final('hex');
+  return encrypted;
+}
+
+function decrypt(encryptedText) {
+  try {
+    const decipher = crypto.createDecipher('aes-256-cbc', encryptionKey);
+    let decrypted = decipher.update(encryptedText, 'hex', 'utf8');
+    decrypted += decipher.final('utf8');
+    return decrypted;
+  } catch (error) {
+    console.error('Decryption error:', error);
+    return null;
+  }
+}
+
 io.on("connection", (socket) => {
   console.log("connected");
 
@@ -67,7 +90,7 @@ io.on("connection", (socket) => {
 
     socket.emit("message", {
       user: "admin",
-      text: `${user.username}, Welcome Aboard ${user.room}`,
+      text: `Welcome, ${user.username}! You have joined the chat in ${user.room}.`,
     });
 
     socket.broadcast
@@ -84,13 +107,21 @@ io.on("connection", (socket) => {
     callback();
   });
 
-  socket.on("sendmessage", (message, callback) => {
-    const user = getuser(socket.id);
+  
 
-    io.to(user.room).emit("message", { user: user.username, text: message });
+socket.on("sendmessage", (message, callback) => {
+  const user = getuser(socket.id);
+  const encryptedMessage = encrypt(message);
 
-    callback();
-  });
+  const encryptionKey = 'hey'; // Replace with your encryption key
+
+  const decryptedMessage = decrypt(encryptedMessage, encryptionKey);
+
+  io.to(user.room).emit("message", { user: user.username, text: decryptedMessage });
+
+  callback();
+});
+
 
   socket.on("disconnect", () => {
     console.log("user is no longer here");
@@ -104,7 +135,9 @@ io.on("connection", (socket) => {
       io.to(user.room).emit("message", { user: "admin", text: `${user.username} has left the chat` });
     }
   });
+
 });
+
 app.post("/login", async (req, res) => {
     try {
       const { email, password } = req.body;

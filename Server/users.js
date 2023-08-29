@@ -1,6 +1,7 @@
 const userlist=[]
 const addup=({id,username,room})=>{
-username=username.trim().toLowerCase()
+  if(!username || !room) return { error: 'Username and room are required.' };
+  username = username.trim().toLowerCase();
 room=room.trim().toLowerCase()
 
 const existinguser=userlist.find((user)=>user.room===room&&user.username===username)
