@@ -18,7 +18,7 @@ setuser({...user,[name]:value})
     const register = () => {
         const { username, email, password, confirmpassword } = user;
         if (username && email && password && password === confirmpassword) {
-          fetch("http://localhost:5000/register", {
+          fetch("https://backend-2-chat.onrender.com/register", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
