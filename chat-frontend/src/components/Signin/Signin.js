@@ -14,7 +14,7 @@ const Signin=()=>{
         setuser({...user,[name]:value})
     }
     const login = () => {
-        fetch("http://localhost:5000/login", {
+        fetch("https://backend-2-chat.onrender.com/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
