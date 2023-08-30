@@ -1,3 +1,8 @@
 its working chat app with sign in and sign up so you need to first sign up and sign in and then create a room and enter your name and room will be created and if another person wants to join then give him same link and 
 after sign in it will ask for room name to join and you will be in same room.
 Please ignore the client folder 
+
+#how to run code-
+Just run command npm install in both frontend and backend 
+and then start the server with npm start
+after server run npm start for client it will run.
