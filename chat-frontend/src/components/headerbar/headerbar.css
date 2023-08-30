@@ -1,0 +1,36 @@
+:root{
+    font-family: 'Montserrat', sans-serif;
+}
+#main-container-header{
+    background-color: lightblue;
+    width: 100%;
+   
+
+
+}
+#second-container{
+    display: flex;
+}
+#second-container>img{
+    width: 2em;
+    height: 2em;
+    align-self: center;
+ background-color: lightgreen;
+ border-radius: 20em;
+}
+#heading{
+    margin-left: 1em;
+}
+#cancel-button{
+    width: 1em;
+    height: 1em;
+   align-self: center;
+ border-radius: 20em;
+ margin-left: auto;
+ margin-right: 1em;
+}
+#cancel-button img{
+width: 1em;
+
+}
+

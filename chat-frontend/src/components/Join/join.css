@@ -1,0 +1,32 @@
+:root{
+    font-family: 'Montserrat', sans-serif;
+}
+body{
+    background: linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
+    
+}
+#main-container{
+background-color: azure;
+ margin:16em auto;
+ width: 30vw;
+ height: 28vh;
+ text-align: center;
+ padding: 3em;
+}
+#main-container>div{
+ margin-bottom: 1em;
+}
+.room-inputs{
+    width: 15em;
+    padding: .2em;
+    font-size: 1em;
+}
+#button-room{
+    border-radius: .3em;
+    border: .1em solid grey;
+    padding: .4em;
+    width: 17.2em;
+    font-size: .9em;
+   
+    
+}
